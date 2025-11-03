@@ -11,8 +11,6 @@ def group(f: Callable[[T], R], items: List[T]) -> Dict[R, List[T]]:
 
     for item in items:
         key: R = f(item)
-        if key not in res:
-            res[key] = []
-        res[key].append(item)
+        res[key] = ([] if key not in res else res[key]) + [item]
 
     return res
